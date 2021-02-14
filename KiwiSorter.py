@@ -3,9 +3,16 @@ Data = [2.049,2.398,2.009,1.809,2.894,2.054,2.927,2.848,2.246,1.971,2.432,2.739,
 
 def bubbleSorter(array):
 	for item in range(len(array)):
+		swap = True
+
 		for j in range(0, (len(array) - item - 1)):
 			if array[j] > array[j + 1]:
 				(array[j], array[j + 1]) = (array[j + 1], array[j])
+
+				swap = False
+
+				if swap == True:
+					break
 start_timeB = time.time()
 bubbleSorter(Data)
 print(Data)
@@ -27,6 +34,50 @@ start_timeS = time.time()
 selectSort(Data)
 print(Data)
 end_timeS = time.time()
+
+def merge_sort(inp_arr):
+    size = len(inp_arr)
+    if size > 1:
+        middle = size // 2
+        left_arr = inp_arr[:middle]
+        right_arr = inp_arr[middle:]
+ 
+        merge_sort(left_arr)
+        merge_sort(right_arr)
+ 
+        p = 0
+        q = 0
+        r = 0
+ 
+        left_size = len(left_arr)
+        right_size = len(right_arr)
+        while p < left_size and q < right_size:
+            if left_arr[p] < right_arr[q]:
+              inp_arr[r] = left_arr[p]
+              p += 1
+            else:
+                inp_arr[r] = right_arr[q]
+                q += 1
+             
+            r += 1
+ 
+        
+        while p < left_size:
+            inp_arr[r] = left_arr[p]
+            p += 1
+            r += 1
+ 
+        while q < right_size:
+            inp_arr[r]=right_arr[q]
+            q += 1
+            r += 1
+ 
+start_timeM = time.time()
+merge_sort(Data)
+print("Sorted Array:\n")
+print(Data)
+end_timeM = time.time()
+
 print("")
 print("Times:")
 print("Bubble sort")
@@ -34,3 +85,6 @@ print(end_timeB - start_timeB)
 print("")
 print("Selection sort")
 print(end_timeS - start_timeS)
+print("")
+print("Merge Sort")
+print(end_timeM - start_timeM)
